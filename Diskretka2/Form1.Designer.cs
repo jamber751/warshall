@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.buttonRazmer = new System.Windows.Forms.Button();
             this.textBoxRazmer = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,8 +38,10 @@
             this.matrixSelector = new System.Windows.Forms.ComboBox();
             this.buttonRezultat = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -55,9 +58,20 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ввод данных";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(75, 23);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(220, 23);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "Ориентированный граф";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // buttonRazmer
             // 
-            this.buttonRazmer.Location = new System.Drawing.Point(257, 34);
+            this.buttonRazmer.Location = new System.Drawing.Point(136, 53);
             this.buttonRazmer.Name = "buttonRazmer";
             this.buttonRazmer.Size = new System.Drawing.Size(112, 28);
             this.buttonRazmer.TabIndex = 2;
@@ -67,7 +81,7 @@
             // 
             // textBoxRazmer
             // 
-            this.textBoxRazmer.Location = new System.Drawing.Point(181, 36);
+            this.textBoxRazmer.Location = new System.Drawing.Point(181, 20);
             this.textBoxRazmer.MaxLength = 2;
             this.textBoxRazmer.Name = "textBoxRazmer";
             this.textBoxRazmer.Size = new System.Drawing.Size(30, 27);
@@ -76,7 +90,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 39);
+            this.label1.Location = new System.Drawing.Point(21, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 19);
             this.label1.TabIndex = 0;
@@ -94,6 +108,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBox1);
             this.groupBox3.Controls.Add(this.matrixSelector);
             this.groupBox3.Controls.Add(this.buttonRezultat);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -109,7 +124,7 @@
             // 
             this.matrixSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.matrixSelector.FormattingEnabled = true;
-            this.matrixSelector.Location = new System.Drawing.Point(176, 39);
+            this.matrixSelector.Location = new System.Drawing.Point(200, 54);
             this.matrixSelector.Name = "matrixSelector";
             this.matrixSelector.Size = new System.Drawing.Size(121, 27);
             this.matrixSelector.TabIndex = 1;
@@ -117,7 +132,7 @@
             // 
             // buttonRezultat
             // 
-            this.buttonRezultat.Location = new System.Drawing.Point(34, 39);
+            this.buttonRezultat.Location = new System.Drawing.Point(75, 54);
             this.buttonRezultat.Name = "buttonRezultat";
             this.buttonRezultat.Size = new System.Drawing.Size(108, 27);
             this.buttonRezultat.TabIndex = 0;
@@ -127,12 +142,22 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(118)))), ((int)(((byte)(184)))));
             this.groupBox4.Location = new System.Drawing.Point(427, 114);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(400, 400);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 19);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
             // 
             // Form1
             // 
@@ -153,6 +178,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -168,6 +196,8 @@
         private System.Windows.Forms.Button buttonRazmer;
         private System.Windows.Forms.Button buttonRezultat;
         private System.Windows.Forms.ComboBox matrixSelector;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

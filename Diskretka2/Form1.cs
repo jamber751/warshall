@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Diskretka2
 
         int size;
         List<int[,]> matrix = new List<int[,]>();
+        bool directed = false;
 
         public Form1()
         {
@@ -30,7 +32,7 @@ namespace Diskretka2
                 number = Int32.Parse(box.Text);
                 if (binary)
                 {
-                    if(number != 1 && number != 0)
+                    if (number != 1 && number != 0)
                     {
                         isValid = false;
                         box.BackColor = Color.LightPink;
@@ -46,9 +48,9 @@ namespace Diskretka2
                     isValid = true;
                     box.BackColor = Color.White;
                 }
-                
+
             }
-            catch(System.FormatException)
+            catch (System.FormatException)
             {
                 isValid = false;
                 box.BackColor = Color.LightPink;
@@ -56,30 +58,59 @@ namespace Diskretka2
             return number;
         }
 
+
         private void warshall(ref List<int[,]> matrix, int size)
         {
             int[,] newMatrix = new int[size, size];
-
-            for (int iteration = 0; iteration < size; iteration++)
+            if (directed == true)
             {
-                newMatrix = new int[size, size];
-                for (int i = 0; i < size; i++)
+                for (int iteration = 0; iteration < size; iteration++)
                 {
-                    for (int j = 0; j < size; j++)
+                    newMatrix = new int[size, size];
+                    for (int i = 0; i < size; i++)
                     {
-                        if (i == j || matrix[iteration][i, j] == 1)
+                        for (int j = 0; j < size; j++)
                         {
-                            newMatrix[i,j] = matrix[iteration][i, j];
-                        }
-                        else if (matrix[iteration][iteration, j] == 1 && matrix[iteration][i, iteration] == 1)
-                        {
-                            newMatrix[i, j] = 1;
+                            if (matrix[iteration][i, j] == 1)
+                            {
+                                newMatrix[i, j] = matrix[iteration][i, j];
+                            }
+                            else if (matrix[iteration][iteration, j] == 1 && matrix[iteration][i, iteration] == 1)
+                            {
+                                newMatrix[i, j] = 1;
+                            }
                         }
                     }
+                    matrix.Add(newMatrix);
                 }
-                matrix.Add(newMatrix);
+            }
+            else
+            {
+                for (int iteration = 0; iteration < size; iteration++)
+                {
+                    newMatrix = new int[size, size];
+                    for (int i = 0; i < size; i++)
+                    {
+                        for (int j = i + 1; j < size; j++)
+                        {
+                            if (matrix[iteration][i, j] == 1)
+                            {
+                                newMatrix[i, j] = 1;
+                                newMatrix[j, i] = 1;
+                            }
+                            else if (matrix[iteration][iteration, j] == 1 && matrix[iteration][i, iteration] == 1)
+                            {
+                                newMatrix[i, j] = 1;
+                                newMatrix[j, i] = 1;
+                            }
+                        }
+                    }
+                    matrix.Add(newMatrix);
+                }
             }
         }
+
+
 
         private void buttonRazmer_Click(object sender, EventArgs e)
         {
@@ -89,16 +120,16 @@ namespace Diskretka2
 
             bool isValid = false;
             size = get_int(textBoxRazmer, ref isValid, false);
-            int posX = 200  - 33 * size / 2;
+            int posX = 200 - 33 * size / 2;
             int posY = 20;
 
             if (isValid)
             {
                 groupBox2.Controls.Clear();
-                for(int i = 0; i < size; i++)
+                for (int i = 0; i < size; i++)
                 {
                     posX = 200 - 33 * size / 2;
-                    for(int j = 0; j < size; j++)
+                    for (int j = 0; j < size; j++)
                     {
                         TextBox m = new TextBox();
                         m.Location = new Point(posX, posY);
@@ -109,11 +140,12 @@ namespace Diskretka2
                     }
                     posY += 30;
                 }
-            }  
+            }
         }
 
         private void buttonRezultat_Click(object sender, EventArgs e)
         {
+            matrix.Clear();
             groupBox4.Controls.Clear();
             matrixSelector.Items.Clear();
 
@@ -126,19 +158,19 @@ namespace Diskretka2
             foreach (TextBox box in matrix_box)
             {
                 int value = get_int(box, ref isValid, true);
-                if(isValid)
+                if (isValid)
                 {
                     initial_matrix[id / size, id % size] = value;
                 }
                 id++;
             }
 
-            if(isValid)
+            if (isValid)
             {
                 matrix.Add(initial_matrix);
                 warshall(ref matrix, size);
 
-                for(int i = 0; i < size; i++)
+                for (int i = 0; i < size; i++)
                 {
                     matrixSelector.Items.Add("A" + (i + 1).ToString());
                 }
@@ -172,6 +204,18 @@ namespace Diskretka2
                     posX += 33;
                 }
                 posY += 30;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked == true)
+            {
+                directed = true;
+            }
+            else 
+            {
+                directed = false;
             }
         }
     }
